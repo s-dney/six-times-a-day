@@ -12,7 +12,7 @@ let marcusColor = "gray";
 let marcusFont = "RobotoMono";
 let benColor = "white";
 let benFont = "LibreBaskerville";
-let one, haha, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty;
+let one, haha, two, three, ff, cryingblood, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, hhhhhhh;
 let textLineArray = [];
 let sound;
 let soundTime;
@@ -23,10 +23,10 @@ const playButton = document.getElementById("play");
 let textLines = [
   "A clock is right four times a day. If you think about the minute hand, and the second hand. Thank you…",
   "The minute hand and the hour hand AND the second hand, it could be right SIX times a day!",
-  "No— no, Kissel, no. I’m like, I’m — ff — I dunno — literally about to start crying blood.",
+  "No— no, Kissel, no. I’m like, I’m        I dunno — literally about to start",
   "If you think about the hour, the right— so it’s two PM, then it’s… fifteen minutes… ",
   "It’s, no— they are NOT TWO SEPARATE — NO, ASSHOLE — NO NO NO — YOU CAN’T JUST SAY — NO NO NO NO — YOU CAN’T JUST — NO — YOU — ARE INCORRECT.",
-  "so it could actually be right six times a day.",
+  "so it could actually be right six times a day.           AND,",
   "YOU ARE THINKING ABOUT A CLOCK COMPLETELY WRONG. A TIME IS THE COORDINATION OF THE MINUTE HAND, AND THE HOUR HAND—",
   "All three of ‘em— minute, hour,",
   "And second!",
@@ -98,7 +98,7 @@ class textLine {
 }
 
 class textLineVertical {
-  constructor(content, x, speaker, size, controller, offset, speed) {
+  constructor(content, x, speaker, size, controller, offset, speed, maxwidth = null, maxheight = null) {
     switch(speaker) {
       case "ben":
       this.f = benColor
@@ -120,6 +120,8 @@ class textLineVertical {
     this.o = offset;
     this.multiplier = speed;
     // console.log(textLineArray)
+    this.maxwidth = maxwidth;
+    this.maxheight = maxheight;
   }
 
   display() {
@@ -127,7 +129,7 @@ class textLineVertical {
     noStroke();
     textFont(this.font);
     textSize(this.s);
-    text(this.c, this.x, (-this.controller*this.multiplier)-this.o);
+    text(this.c, this.x, (-this.controller*this.multiplier)-this.o, this.maxwidth, this.maxheight);
   }
 }
 
@@ -138,11 +140,14 @@ function draw() {
   play.onclick = function() {
     if (soundPlaying) {
       sound.pause();
+
+      play.innerText = "▸"
       soundPlaying = false;
     } else {
       sound.currentTime = soundTime;
       console.log(soundTime);
       sound.play();
+      play.innerText = "▪"
       soundPlaying = true;
     }
   }
@@ -153,25 +158,31 @@ function draw() {
   
   two = new textLine(textLines[1], -20, "ben", 40, s, 2800, 65) //   "The minute hand and the hour hand AND the second hand, it could be right SIX times a day!"
   
-  three = new textLine(textLines[2], 70, "henry", 40, s, 2000, 65) // "no... I'm about to start crying blood"
+  three = new textLine(textLines[2], 70, "henry", 40, s, 2000, 65) // "no... I'm about to start"
+
+  ff = new textLine('FFF-', 0, "henry", 40, s, 1250, 65) // "FFF-"
+
+  cryingblood = new textLine('crying blood.', 40, "henry", 100, s, 500, 65) // "crying blood"
+
+  hhhhhhh = new textLineVertical('HHHHHHHHHHHHHH', 0, "marcus", 60, s, 3000, -60) // (MARCUS) ha ha ha ha ha
 
   four = new textLine(textLines[3], -20, "ben", 40, s, 0, 65) // If you think about the hour...
 
-  five = new textLine(textLines[4], 70, "henry", 60, s, -500, 100) // THEY ARE NOT TWO SEPARATE -- YOU ARE INCORRECT
+  five = new textLine(textLines[4], 70, "henry", 100, s, -500, 150) // THEY ARE NOT TWO SEPARATE -- YOU ARE INCORRECT
 
   six = new textLine(textLines[5], -20, "ben", 40, s, -2100, 65) // So it could actually be right six times a day.
 
-  seven = new textLine(textLines[6], 90, "henry", 100, s, -13500, 200) // YOU ARE THINKING ABOUT A CLOCK COMPLETELY WRONG
+  seven = new textLine(textLines[6], 300, "henry", 200, s, -14000, 260) // YOU ARE THINKING ABOUT A CLOCK COMPLETELY WRONG
 
-  eight = new textLine(textLines[7], 120, "marcus", 60, s, -6000, 60) // (MARCUS) All three of 'em. Minute, hour-- 
+  eight = new textLine(textLines[7], 120, "marcus", 60, s, -5000, 60) // (MARCUS) All three of 'em. Minute, hour-- 
 
-  nine = new textLine(textLines[8], 120, "marcus", 70, s, -9600, 80) // MARCUS: And second!
+  nine = new textLine(textLines[8], 120, "marcus", 70, s, -8500, 80) // MARCUS: And second!
 
-  ten = new textLine(textLines[9], 70, "henry", 70, s, -9600, 80) // Henry: And second!
+  ten = new textLine(textLines[9], 70, "henry", 70, s, -8500, 80) // Henry: And second!
 
-  eleven = new textLine(textLines[10], 70, "henry", 70, s, -10100, 80) // Henry: So it can ONLY BE TWICE
+  eleven = new textLine(textLines[10], 70, "henry", 70, s, -9000, 80) // Henry: So it can ONLY BE TWICE
 
-  twelve = new textLine(textLines[11], -20, "ben", 40, s, -10200, 80) // Ben: Yeah, but individually...
+  twelve = new textLine(textLines[11], -20, "ben", 40, s, -10100, 80) // Ben: Yeah, but individually...
 
   thirteen = new textLine(textLines[12], 70, "marcus", 70, s, -16000, 120) // Marcus: Well, no-- 24 times in a day.
 
@@ -189,7 +200,7 @@ function draw() {
 
   twenty = new textLine("Might want to get a clock that's right more than two times a day.", -20, "ben", 70, s, -20000, 80) // Ben: might want to get a clock that's right more than two times a day.
 
-  textLineArray = [one, haha, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty];
+  textLineArray = [one, haha, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, ff, cryingblood, hhhhhhh];
 
   angleMode(DEGREES);
   background(0);
