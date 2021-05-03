@@ -27,10 +27,16 @@
 
 body {
   background-color: black;
+  cursor: grab;
+}
+
+canvas {
+  
 }
 
 button {
   background-color: black;
   color: white;
   font-family: 'RobotoMono';
+  cursor: pointer;
 }

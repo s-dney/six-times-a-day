@@ -98,7 +98,7 @@ class textLine {
 }
 
 class textLineVertical {
-  constructor(content, x, speaker, size, controller, offset, speed, maxwidth = null, maxheight = null) {
+  constructor(content, x, speaker, size, controller, offset, speed) {
     switch(speaker) {
       case "ben":
       this.f = benColor
@@ -120,8 +120,6 @@ class textLineVertical {
     this.o = offset;
     this.multiplier = speed;
     // console.log(textLineArray)
-    this.maxwidth = maxwidth;
-    this.maxheight = maxheight;
   }
 
   display() {
@@ -129,7 +127,7 @@ class textLineVertical {
     noStroke();
     textFont(this.font);
     textSize(this.s);
-    text(this.c, this.x, (-this.controller*this.multiplier)-this.o, this.maxwidth, this.maxheight);
+    text(this.c, this.x, (-this.controller*this.multiplier)-this.o);
   }
 }
 
@@ -272,3 +270,14 @@ function draw() {
     line(0, 0, 0 + cos(h) * hoursRadius, 0 + sin(h) * hoursRadius);
   }
 }
+
+
+document.body.addEventListener('mousedown', e => {
+  document.body.style.cursor = "grabbing"
+  console.log('clickin')
+});
+
+document.body.addEventListener('mouseup', e => {
+  document.body.style.cursor = "grab"
+  console.log('clickout')
+});
