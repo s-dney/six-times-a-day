@@ -44,7 +44,7 @@ let textLines = [
 
 function setup() {
   angleMode(DEGREES)
-  createCanvas(1400, 700);
+  createCanvas(window.innerWidth, window.innerHeight);
   stroke(255);
 
   let radius = min(width, height) / 2;
